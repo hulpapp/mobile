@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hulp/modules/view/singUp/signUp.dart';
 import 'package:hulp/utils/responsivity.dart';
 
 
@@ -66,7 +67,11 @@ class _State extends State<LoginPage> {
                         children: [
                         OutlinedButton(
                           onPressed: () {
-                          print('Received click');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SingUpPage()),
+                            );
+
                           },
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
