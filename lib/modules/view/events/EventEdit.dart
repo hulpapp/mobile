@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hulp/modules/entitys/event.dart';
+import 'package:hulp/modules/entities/event.dart';
 
 class EditEventPage extends StatefulWidget {
   const EditEventPage({Key? key, required this.event}) : super(key: key);

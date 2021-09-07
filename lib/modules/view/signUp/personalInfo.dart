@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 
-class InfoPessoal extends StatefulWidget {
+class PersonalInfo extends StatefulWidget {
   @override
-  InfoPessoalState createState() => InfoPessoalState();
+  PersonalInfoState createState() => PersonalInfoState();
 }
 
-class InfoPessoalState extends State<InfoPessoal> {
-  static final pessoalFormKey = GlobalKey<FormState>();
+class PersonalInfoState extends State<PersonalInfo> {
+  static final personalFormKey = GlobalKey<FormState>();
   static TextEditingController controllerName = new TextEditingController();
   static TextEditingController controllerCPF = new TextEditingController();
   static TextEditingController controllerRG = new TextEditingController();
@@ -25,7 +25,7 @@ class InfoPessoalState extends State<InfoPessoal> {
     return Container(
         child: Form(
           autovalidateMode: AutovalidateMode.disabled,
-          key: pessoalFormKey,
+          key: personalFormKey,
           child: Column(
             children: <Widget>[
               TextFormField(

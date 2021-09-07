@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hulp/modules/entitys/event.dart';
+import 'package:hulp/modules/entities/event.dart';
 
 class EventDetail extends StatefulWidget {
   const EventDetail({Key? key, required this.event}) : super(key: key);

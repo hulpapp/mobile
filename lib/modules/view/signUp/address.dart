@@ -5,14 +5,14 @@ class Contact extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return AdressState();
+    return AddressState();
   }
 
 }
 
-class AdressState extends State<Contact> {
+class AddressState extends State<Contact> {
 
-  static final adressFormKey = GlobalKey<FormState>();
+  static final addressFormKey = GlobalKey<FormState>();
   static TextEditingController controllerCEP = new TextEditingController();
   static TextEditingController controllerStreet = new TextEditingController();
   static TextEditingController controllerCity = new TextEditingController();
@@ -26,7 +26,7 @@ class AdressState extends State<Contact> {
     return Container(
         child: Form(
           autovalidateMode: AutovalidateMode.disabled,
-          key: adressFormKey,
+          key: addressFormKey,
           child: Column(
             children: <Widget>[
               SizedBox(height: 20),

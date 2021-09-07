@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   flutter_localizations:
     sdk: flutter
 
@@ -32,6 +34,8 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_form_builder: ^6.0.1
   dio: ^4.0.0
+  google_maps_flutter: ^2.0.8
+  google_maps_flutter_web: ^0.3.0+4
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:hulp/modules/view/events/createEvent.dart';
 import 'package:hulp/modules/view/homePage.dart';
 import 'package:hulp/modules/view/login.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hulp/modules/view/mapVisualizer.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         '/event/new': (context) => CreateEventPage(),
+        '/mapVisualizer': (context) => MapVisualizer(),
       },
     );
   }

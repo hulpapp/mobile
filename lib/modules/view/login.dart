@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hulp/modules/view/singUp/signUp.dart';
+import 'package:hulp/modules/view/signUp/signUp.dart';
 import 'package:hulp/utils/responsivity.dart';
 
 
@@ -69,7 +69,7 @@ class _State extends State<LoginPage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SingUpPage()),
+                              MaterialPageRoute(builder: (context) => SignUpPage()),
                             );
 
                           },

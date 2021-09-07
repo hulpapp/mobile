@@ -1,40 +1,40 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:hulp/modules/view/singUp/upload.dart';
+import 'package:hulp/modules/view/signUp/upload.dart';
 import 'package:hulp/utils/responsivity.dart';
-import 'package:hulp/modules/view/singUp/adress.dart';
-import 'package:hulp/modules/view/singUp/infoPessoal.dart';
-import 'package:hulp/modules/view/singUp/login.dart';
+import 'package:hulp/modules/view/signUp/address.dart';
+import 'package:hulp/modules/view/signUp/personalInfo.dart';
+import 'package:hulp/modules/view/signUp/login.dart';
 
-class SingUpPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   String get title => 'Cadastro';
 
   @override
-  _SingUpPageState createState() => _SingUpPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SingUpPageState extends State<SingUpPage> {
+class _SignUpPageState extends State<SignUpPage> {
   var currentStep = 0;
 
   @override
   Widget build(BuildContext context) {
 
     var mapData = HashMap<String, String>();
-    mapData["nome"] = InfoPessoalState.controllerName.text;
-    mapData["cpf"] = InfoPessoalState.controllerCPF.text;
-    mapData["rg"] = InfoPessoalState.controllerRG.text;
-    mapData["birth"] = InfoPessoalState.controllerDateOfBirth.text;
-    mapData["phone"] = InfoPessoalState.controllerMobileNo.text;
+    mapData["nome"] = PersonalInfoState.controllerName.text;
+    mapData["cpf"] = PersonalInfoState.controllerCPF.text;
+    mapData["rg"] = PersonalInfoState.controllerRG.text;
+    mapData["birth"] = PersonalInfoState.controllerDateOfBirth.text;
+    mapData["phone"] = PersonalInfoState.controllerMobileNo.text;
     mapData["email"] = LoginState.controllerEmail.text;
-    mapData["cep"] = AdressState.controllerCEP.text;
-    mapData["street"] = AdressState.controllerStreet.text;
-    mapData["city"] = AdressState.controllerCity.text;
-    mapData["state"] = AdressState.controllerState.text;
+    mapData["cep"] = AddressState.controllerCEP.text;
+    mapData["street"] = AddressState.controllerStreet.text;
+    mapData["city"] = AddressState.controllerCity.text;
+    mapData["state"] = AddressState.controllerState.text;
 
     List<Step> steps = [
       Step(
         title: Text('Informações Pessoais'),
-        content: InfoPessoal(),
+        content: PersonalInfo(),
         state: currentStep == 0 ? StepState.editing : StepState.indexed,
         isActive: true,
       ),
@@ -73,8 +73,8 @@ class _SingUpPageState extends State<SingUpPage> {
               setState(() {
                 print(step);
 
-                if(step == 3  && InfoPessoalState.pessoalFormKey.currentState!.validate() &&
-                    AdressState.adressFormKey.currentState!.validate() &&
+                if(step == 3  && PersonalInfoState.personalFormKey.currentState!.validate() &&
+                    AddressState.addressFormKey.currentState!.validate() &&
                     LoginState.loginFormKey.currentState!.validate() ){
                   currentStep = step;
                 }
@@ -87,10 +87,10 @@ class _SingUpPageState extends State<SingUpPage> {
             onStepContinue: () {
               setState(() {
                 if (currentStep < steps.length - 1) {
-                  if (currentStep == 0 && InfoPessoalState.pessoalFormKey.currentState!.validate()) {
+                  if (currentStep == 0 && PersonalInfoState.personalFormKey.currentState!.validate()) {
                     currentStep = currentStep + 1;
                   } else if (currentStep == 1 &&
-                      AdressState.adressFormKey.currentState!.validate()) {
+                      AddressState.addressFormKey.currentState!.validate()) {
                     currentStep = currentStep + 1;
                   }
                   else if (currentStep == 2 &&

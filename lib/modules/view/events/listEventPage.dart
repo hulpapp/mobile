@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hulp/modules/entitys/event.dart';
+import 'package:hulp/modules/entities/event.dart';
 import 'package:dio/dio.dart';
 
 import '../side_menu.dart';

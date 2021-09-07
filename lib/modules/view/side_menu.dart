@@ -14,7 +14,7 @@ class SideMenu extends StatelessWidget {
             child: Center(
               child: Text(
                   'hulp',
-                  style: GoogleFonts.anton(fontSize: 100,fontWeight: FontWeight.w700, color: Color.fromARGB(255,72,20,69))
+                  style: GoogleFonts.anton(fontSize: 95,fontWeight: FontWeight.w700, color: Color.fromARGB(255,72,20,69))
               ),
             ),
           ),
@@ -24,6 +24,15 @@ class SideMenu extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 '/event/new',
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Locais'),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/mapVisualizer',
               );
             },
           ),
