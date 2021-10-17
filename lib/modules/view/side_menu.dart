@@ -28,11 +28,11 @@ class SideMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Locais'),
+            title: Text('login'),
             onTap: () {
               Navigator.pushNamed(
                 context,
-                '/mapVisualizer',
+                '/login',
               );
             },
           ),

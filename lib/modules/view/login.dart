@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hulp/modules/view/signUp/signUp.dart';
 import 'package:hulp/utils/responsivity.dart';
+import 'package:hulp/modules/presenter/user.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -11,15 +12,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _State extends State<LoginPage> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  @override
+  bool isLoading= true;
+
+  void _changed() {
+    setState(() {isLoading = !isLoading;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style =
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20), minimumSize: Size(115, 35) );
-
+    UserPresenter userControl =  new UserPresenter(context);
     final ButtonStyle loginStyle =
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20), minimumSize: Size(115, 35),primary: Color.fromRGBO(98, 0, 238, 1)  );
 
@@ -43,7 +51,7 @@ class _State extends State<LoginPage> {
                     Container(
                       padding: EdgeInsets.all(10),
                       child: TextField(
-                        controller: nameController,
+                        controller: emailController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Email',
@@ -61,15 +69,16 @@ class _State extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    Padding(
+                    isLoading? Padding(
                       padding: const EdgeInsets.fromLTRB(10,42.0,10,10),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                         OutlinedButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
                               MaterialPageRoute(builder: (context) => SignUpPage()),
+                              '/signup/',
                             );
 
                           },
@@ -79,62 +88,31 @@ class _State extends State<LoginPage> {
                             ),style: style,),
                           ElevatedButton(
                                       style: loginStyle,
-                                      onPressed: () {},
+                                      onPressed: () { _changed();
+                                      userControl.loginWithEmail(emailController.text, passwordController.text);
+                                        },
                                       child: Padding(
                                         padding: const EdgeInsets.all(10.0),
                                         child: const Text('LOGIN'),
                                       ),
                                     ),
                         ],),
+                    ) : Padding(
+                      padding: const EdgeInsets.fromLTRB(10,42.0,10,10),
+                      child: Center(child:CircularProgressIndicator()),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
+                    SizedBox(height: 60,),
+                    Visibility(
+                      child: TextButton(
                         onPressed: () {
                           print('Received click');
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: const Text('LOGIN COM GOOGLE'),
-                        ),),
+                        child: Text(
+                            'Esqueci a senha',
+                            style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.w400, color: Color.fromRGBO(102, 102, 102, 1))
+                        )),
+                      visible: isLoading,
                     ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          print('Received click');
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: const Text('LOGIN COM FACEBOOK',style: TextStyle(color: Colors.white),),
-                        ),style: OutlinedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255,24,119,242)
-                      ),),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          print('Received click');
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: const Text('LOGIN COM APPLE',style: TextStyle(color: Colors.white),),
-                        ),style: OutlinedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(51, 51, 51,1)
-                      ),),
-                    ),
-                    SizedBox(height: 15,),
-                    TextButton(
-                      onPressed: () {
-                        print('Received click');
-                      },
-                      child: Text(
-                          'Esqueci a senha',
-                          style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.w400, color: Color.fromRGBO(102, 102, 102, 1))
-                      )),
 
                   ],
                 ),

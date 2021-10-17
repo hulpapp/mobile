@@ -34,12 +34,20 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_form_builder: ^6.0.1
   dio: ^4.0.0
+  brasil_fields: ^1.1.4
+  cpfcnpj:
+    git:
+      url: https://github.com/erickhaendel/dart-cpfcnpj.git
+  envify: ^2.0.2
+  flutter_secure_storage: ^4.2.1
   google_maps_flutter: ^2.0.8
   google_maps_flutter_web: ^0.3.0+4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  envify_generator: ^2.0.2
+  build_runner: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

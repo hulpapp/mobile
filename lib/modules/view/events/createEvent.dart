@@ -13,10 +13,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
   bool _ageHasError = false;
-  bool _genderHasError = false;
 
   final ValueChanged _onChanged = (val) => print(val);
-  var genderOptions = ['Male', 'Female', 'Other'];
 
   @override
   Widget build(BuildContext context) {

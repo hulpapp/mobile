@@ -3,9 +3,11 @@ import 'package:hulp/modules/view/events/createEvent.dart';
 import 'package:hulp/modules/view/homePage.dart';
 import 'package:hulp/modules/view/login.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hulp/modules/view/mapVisualizer.dart';
+
+import 'modules/view/singUp/signUp.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 
@@ -23,9 +25,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: HomePage(),
+      home: LoginPage(),
       routes: {
         '/event/new': (context) => CreateEventPage(),
+        '/signup/': (context) => SingUpPage(),
+        '/login': (context) => LoginPage(),
         '/mapVisualizer': (context) => MapVisualizer(),
       },
     );

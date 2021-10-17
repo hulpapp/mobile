@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
 class PersonalInfo extends StatefulWidget {
@@ -10,7 +12,7 @@ class PersonalInfoState extends State<PersonalInfo> {
   static final personalFormKey = GlobalKey<FormState>();
   static TextEditingController controllerName = new TextEditingController();
   static TextEditingController controllerCPF = new TextEditingController();
-  static TextEditingController controllerRG = new TextEditingController();
+  static TextEditingController controllerPassport = new TextEditingController();
 
   static TextEditingController controllerLastName = new TextEditingController();
   static TextEditingController controllerDateOfBirth = new TextEditingController();
@@ -36,7 +38,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                     Icons.person,
                     color: Colors.grey,
                   ),
-                  labelText: 'Nome',
+                  labelText: 'Nome Completo',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
@@ -62,6 +64,10 @@ class PersonalInfoState extends State<PersonalInfo> {
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                 ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  CpfInputFormatter(),
+                ],
                 validator: (value) {
                   if (value!.trim().isEmpty) {
                     return "O CPF é obrigatorio.";
@@ -72,17 +78,20 @@ class PersonalInfoState extends State<PersonalInfo> {
               SizedBox(height: 20),
               TextFormField(
                 maxLines: 1,
-                controller: controllerRG,
+                controller: controllerPassport,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.account_box_sharp ,
                     color: Colors.grey,
                   ),
-                  labelText: 'Nome',
+                  labelText: 'Passaporte',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                 ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 validator: (value) {
                   if (value!.trim().isEmpty) {
                     return "O nome não pode ser vazio.";
@@ -128,6 +137,10 @@ class PersonalInfoState extends State<PersonalInfo> {
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              TelefoneInputFormatter()
+            ],
             validator: (value)  {
               if (value!.trim().isEmpty) {
                 return "Por favor informe seu telefone";
@@ -143,7 +156,7 @@ class PersonalInfoState extends State<PersonalInfo> {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2019, 8),
+        firstDate: DateTime(1940),
         lastDate: DateTime(2100));
     if (picked != null && picked != selectedDate)
       setState(() {
