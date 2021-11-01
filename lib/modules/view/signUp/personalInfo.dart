@@ -12,6 +12,7 @@ class PersonalInfoState extends State<PersonalInfo> {
   static final personalFormKey = GlobalKey<FormState>();
   static TextEditingController controllerName = new TextEditingController();
   static TextEditingController controllerCPF = new TextEditingController();
+  static TextEditingController controllerRG = new TextEditingController();
   static TextEditingController controllerPassport = new TextEditingController();
 
   static TextEditingController controllerLastName = new TextEditingController();

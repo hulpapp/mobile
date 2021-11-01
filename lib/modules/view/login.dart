@@ -77,8 +77,10 @@ class _State extends State<LoginPage> {
                           onPressed: () {
                             Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(builder: (context) => SignUpPage()),
-                              '/signup/',
+                              '/signup/'
+
+                              // MaterialPageRoute(builder: (context) => SignUpPage()),
+                              // '/signup/',
                             );
 
                           },
@@ -105,7 +107,7 @@ class _State extends State<LoginPage> {
                     Visibility(
                       child: TextButton(
                         onPressed: () {
-                          print('Received click');
+                          print('Received click - Forgot password');
                         },
                         child: Text(
                             'Esqueci a senha',
