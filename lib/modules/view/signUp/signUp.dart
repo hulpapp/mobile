@@ -22,7 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
     var mapData = HashMap<String, String>();
     mapData["nome"] = PersonalInfoState.controllerName.text;
     mapData["cpf"] = PersonalInfoState.controllerCPF.text;
-    mapData["rg"] = PersonalInfoState.controllerRG.text;
+    mapData["rg"] = PersonalInfoState.controllerPassport.text;
     mapData["birth"] = PersonalInfoState.controllerDateOfBirth.text;
     mapData["phone"] = PersonalInfoState.controllerMobileNo.text;
     mapData["email"] = LoginState.controllerEmail.text;
@@ -33,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     List<Step> steps = [
       Step(
-        title: Text('Informações Pessoais'),
+        title: Text('Pessoais'),
         content: PersonalInfo(),
         state: currentStep == 0 ? StepState.editing : StepState.indexed,
         isActive: true,

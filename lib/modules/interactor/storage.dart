@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalStorage {
@@ -6,8 +8,11 @@ class LocalStorage {
   final storage = new FlutterSecureStorage();
 
 
-  saveToken(String token) async{
-    await storage.write(key: 'csrf', value: token);
+  saveToken(var token) async{
+
+    var tk  = jsonDecode(token)['token'];
+
+    await storage.write(key: 'token', value: tk);
 
 
   }
