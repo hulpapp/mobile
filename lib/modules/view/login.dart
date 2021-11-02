@@ -26,7 +26,10 @@ class _State extends State<LoginPage> {
   Future login() async {
     userControl.loginWithEmail(
         _emailController.text, _passwordController.text).then((value) =>
-        print('placeHolderMainPage')).catchError((error) => {
+        Navigator.pushNamed(
+          context,
+          '/home/',
+        )).catchError((error) => {
     alertDialog(context, error as String),
         _changed(),
     _passwordController.clear()

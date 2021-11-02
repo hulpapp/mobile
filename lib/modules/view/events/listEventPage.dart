@@ -18,10 +18,10 @@ class _ListEventState extends State<ListEvent> {
   @override
   void initState() {
     super.initState();
-    events = getStudentList();
+    events = getEventsList();
   }
 
-  Future<List<Event>> getStudentList() async {
+  Future<List<Event>> getEventsList() async {
     var dio = Dio();
     final response = await dio.get('https://jsonplaceholder.typicode.com/todos');
 
@@ -52,7 +52,7 @@ class _ListEventState extends State<ListEvent> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             // By default, show a loading spinner.
             if (!snapshot.hasData) return const Text('Sem eventos Cadastrados');
-            // Render student lists
+            // Render Events lists
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {

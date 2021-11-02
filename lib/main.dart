@@ -5,7 +5,7 @@ import 'package:hulp/modules/view/login.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hulp/modules/view/signUp/signUp.dart';
 
-// import 'modules/view/singUp/signUp.dart';
+import 'modules/view/welcomePage.dart';
 
 void main() {
 
@@ -25,13 +25,15 @@ class MyApp extends StatelessWidget {
       supportedLocales: [const Locale('pt', 'BR')],
       theme: ThemeData(
         primarySwatch: Colors.indigo,
+        visualDensity: VisualDensity.adaptivePlatformDensity
       ),
-      home: LoginPage(),
+      home: WelcomePage(),
       routes: {
         '/event/new': (context) => CreateEventPage(),
         '/signup/': (context) => SignUpPage(),
-        '/login': (context) => LoginPage(),
-        // '/mapVisualizer': (context) => MapVisualizer(),
+        '/login/': (context) => LoginPage(),
+        '/mapVisualizer': (context) => MapVisualizer(),
+        '/home/': (context) => HomePage(),
       },
     );
   }

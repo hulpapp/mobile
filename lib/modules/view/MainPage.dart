@@ -8,6 +8,6 @@ class MainViewPage extends StatefulWidget {
 class _MainViewPageState extends State<MainViewPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(child: Text('main'),);
   }
 }

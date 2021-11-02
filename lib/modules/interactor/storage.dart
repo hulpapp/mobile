@@ -1,24 +1,8 @@
-import 'dart:convert';
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-
-
-  final storage = new FlutterSecureStorage();
-
-
-  saveToken(var token) async{
-
-    var tk  = jsonDecode(token)['token'];
-
-    await storage.write(key: 'token', value: tk);
-
-
+  saveToken(var token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token['token']);
   }
-
-
-
-
-
 }

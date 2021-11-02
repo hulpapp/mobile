@@ -7,5 +7,5 @@ part of 'env.dart';
 // **************************************************************************
 
 class _Env {
-  static const String api_url = 'http://localhost:3000/';
+  static const String api_url = 'http://localhost:3000';
 }
