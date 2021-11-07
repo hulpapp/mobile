@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:hulp/modules/entities/event.dart';
+import 'package:hulp/utils/responsivity.dart';
+import 'package:hulp/utils/topSnackBar.dart';
+import 'package:intl/intl.dart';
+import 'package:hulp/modules/presenter/Event.dart';
+
+import '../side_menu.dart';
+
+
+
 
 class CreateEventPage extends StatefulWidget {
   @override
@@ -7,181 +16,224 @@ class CreateEventPage extends StatefulWidget {
 }
 
 class _CreateEventPageState extends State<CreateEventPage> {
-  var eventForm = GlobalKey<FormState>();
-  bool autoValidate = true;
-  bool readOnly = false;
-  bool showSegmentedControl = true;
-  final _formKey = GlobalKey<FormBuilderState>();
-  bool _ageHasError = false;
+  EventPresenter eventPresenter = new EventPresenter();
+  var _eventForm = GlobalKey<FormState>();
+  TextEditingController _namelController = TextEditingController();
+  TextEditingController _descriptionlController = TextEditingController();
+  TextEditingController _eventDayController = TextEditingController();
+  TextEditingController _eventStartHourController = TextEditingController();
+  TextEditingController _eventEndHourController = TextEditingController();
+  Event _event = new Event();
+  final String successText = 'Evento criado com sucesso!!';
 
-  final ValueChanged _onChanged = (val) => print(val);
+  Future createNewEvent(Event event) async {
+    await eventPresenter.createEvent(event).then((value) => showSnackBar(successText,context,'success'))
+        .then((value) =>    Navigator.pushNamed(
+      context,
+      '/home/',
+    )).catchError((e) {
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Cadastrar Evento')),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                // enabled: false,
-                autovalidateMode: AutovalidateMode.disabled,
-                skipDisabled: false,
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 15),
-                    FormBuilderTextField(
-                      autovalidateMode: AutovalidateMode.always,
-                      name: 'eventName',
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        labelText: 'Nome',
-                        suffixIcon: _ageHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
-                      ),
-                      onChanged: (val) {
-                        setState(() {
-                          _ageHasError = !(_formKey.currentState?.fields['age']
-                              ?.validate() ??
-                              false);
-                        });
-                      },
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.numeric(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      // initialValue: '12',
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const SizedBox(height: 15),
-                    FormBuilderTextField(
-
-                      autovalidateMode: AutovalidateMode.always,
-                      name: 'detail',
-                      decoration: InputDecoration(
-                        labelText: 'Descrição',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                        suffixIcon: _ageHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
-                      ),
-                      onChanged: (val) {
-                        setState(() {
-                          _ageHasError = !(_formKey.currentState?.fields['age']
-                              ?.validate() ??
-                              false);
-                        });
-                      },
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.numeric(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      // initialValue: '12',
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const SizedBox(height: 15),
-                    FormBuilderDateTimePicker(
-                      name: 'date',
-                      initialValue: DateTime.now(),
-                      inputType: InputType.time,
-                      decoration: InputDecoration(
-                        labelText: 'Appointment Time',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                        suffixIcon: IconButton(
-                            icon: Icon(Icons.close),
-                            onPressed: () {
-                              _formKey.currentState!.fields['date']
-                                  ?.didChange(null);
-                            }),
-                      ),
-                      initialTime: TimeOfDay(hour: 8, minute: 0),
-                      locale: Locale.fromSubtags(languageCode: 'fr'),
-                    ),
-                    const SizedBox(height: 15),
-                    FormBuilderDateTimePicker(
-                      name: 'date',
-                      initialValue: DateTime.now(),
-                      inputType: InputType.time,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        labelText: 'Appointment Time',
-                        suffixIcon: IconButton(
-                            icon: Icon(Icons.close),
-                            onPressed: () {
-                              _formKey.currentState!.fields['date']
-                                  ?.didChange(null);
-                            }),
-                      ),
-                      initialTime: TimeOfDay(hour: 8, minute: 0),
-                      locale: Locale.fromSubtags(languageCode: 'fr'),
-                    ),
+      showSnackBar(e,context,'error');
+    });
 
 
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).colorScheme.secondary,
-                      onPressed: () {
-                        if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          print(_formKey.currentState?.value);
-                        } else {
-                          print(_formKey.currentState?.value);
-                          print('validation failed');
-                        }
-                      },
-                      child: const Text(
-                        'Submit',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: Text(
-                        'Reset',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+
   }
 
 
 
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Cadastrar Evento')),
+      drawer: SideMenu(),
+      body: SafeArea(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (Responsive.isDesktop(context))
+              Expanded(
+
+                child: SideMenu(),
+              ),
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Container(
+                      width: card(context),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text("Cadastro de novo evento",style: TextStyle(fontSize: 32),),
+                          ),
+                          Form(
+                            key: _eventForm,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: _namelController,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Nome',
+                                  ),
+                                  validator: (name) {
+                                    if (name == null || name.isEmpty) {
+                                      return 'Por favor, digite um nome para o evento';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (newValue) => _event.name = newValue,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: _descriptionlController,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Descrição',
+                                  ),
+                                  validator: (description) {
+                                    if (description == null || description.isEmpty) {
+                                      return 'Por favor, informe a descrição do evento.';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (newValue) => _event.detail = newValue,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: _eventDayController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: "Data do Evento",
+                                    hintText: "Dia em que o Evento Ocorrerá",
+                                  ),
+                                  onSaved: (newValue) => _event.date = newValue,
+                                  onTap: () async {
+                                    DateTime? date = DateTime(1900);
+                                    FocusScope.of(context).requestFocus(new FocusNode());
+
+                                    date = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2100));
+
+                                    _eventDayController.text = DateFormat('dd/MM/yyyy').format(date!);
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: _eventStartHourController, // add this line.
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Hora de inicio do evento',
+                                  ),
+                                  onSaved: (newValue) => _event.startDate = newValue,
+                                  onTap: () async {
+                                    TimeOfDay time = TimeOfDay.now();
+                                    FocusScope.of(context).requestFocus(new FocusNode());
+
+                                    TimeOfDay? picked = await showTimePicker(
+                                        context: context, initialTime: time);
+                                    if (picked != null && picked != time) {
+                                      _eventStartHourController.text =
+                                          picked.format(context);
+                                      setState(() {
+                                        time = picked;
+                                      });
+                                    }
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: _eventEndHourController, // add this line.
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Hora de inicio do evento',
+                                  ),
+                                  onSaved: (newValue) => _event.endDate = newValue,
+                                  onTap: () async {
+                                    TimeOfDay time = TimeOfDay.now();
+                                    FocusScope.of(context).requestFocus(new FocusNode());
+
+                                    TimeOfDay? picked = await showTimePicker(
+                                        context: context, initialTime: time);
+                                    if (picked != null && picked != time) {
+                                      _eventEndHourController.text = picked.format(context);
+                                      setState(() {
+                                        time = picked;
+                                      });
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: MaterialButton(
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  onPressed: () async{
+                                    if (_eventForm.currentState?.validate() ?? false) {
+                                      _eventForm.currentState?.save();
+                                      await createNewEvent(_event);
+                                    } else {
+                                      print(_eventForm.currentState);
+                                      print('validation failed');
+                                    }
+                                  },
+                                  child: const Text(
+                                    'Submit',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    _eventForm.currentState?.reset();
+                                  },
+                                  // color: Theme.of(context).colorScheme.secondary,
+                                  child: Text(
+                                    'Reset',
+                                    style: TextStyle(
+                                        color: Theme.of(context).colorScheme.secondary),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

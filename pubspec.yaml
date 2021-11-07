@@ -43,6 +43,7 @@ dependencies:
   google_maps_flutter: ^2.0.8
   google_maps_flutter_web: ^0.3.0+4
   http_requests: ^1.2.0
+  top_snackbar_flutter: ^1.0.1
 
 dev_dependencies:
   flutter_test:

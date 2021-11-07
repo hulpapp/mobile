@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hulp/modules/interactor/auth.dart';
+import 'package:hulp/modules/interactor/event.dart';
+import 'package:hulp/modules/entities/event.dart';
 import 'package:hulp/modules/interactor/storage.dart';
 
 
 class EventPresenter {
-  AuthenticatorInteractor auth = new AuthenticatorInteractor();
-  LocalStorage _storage =  new LocalStorage();
+  EventInteractor eventInteractor = new EventInteractor();
 
-  Future listEvent(email, password) async {
-    return await auth.login(email, password).then((value) => _storage.saveToken(value));
+  Future createEvent(Event event) async {
+    return await eventInteractor.create(event);
   }
 
-
+  Future listEvent() async {
+    return await eventInteractor.list();
+  }
 
 
 }

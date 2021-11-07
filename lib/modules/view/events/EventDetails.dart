@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hulp/modules/entities/event.dart';
 
 class EventDetail extends StatefulWidget {
-  const EventDetail({Key? key, required this.event}) : super(key: key);
-  final Event event;
+  const EventDetail({Key? key}) : super(key: key);
 
 
   @override
@@ -42,6 +41,9 @@ class _EventDetailState extends State<EventDetail> {
 
   @override
   Widget build(BuildContext context) {
+    Event args = ModalRoute.of(context)!.settings.arguments as Event ;
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
@@ -59,22 +61,19 @@ class _EventDetailState extends State<EventDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Nome : ${widget.event.name}",
-              style: TextStyle(fontSize: 20),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-            ),
-            Text(
-              "Detalhes : ${widget.event.detail}",
+              "Nome : ${args.name}",
               style: TextStyle(fontSize: 20),
             ),
             Text(
-              "Data de Inicio : ${widget.event.startDate}",
+              "Detalhes : ${args.detail}",
               style: TextStyle(fontSize: 20),
             ),
             Text(
-              "Data de final  : ${widget.event.endDate}",
+              "Data de Inicio : ${args.startDate}",
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              "Data de final  : ${args.endDate}",
               style: TextStyle(fontSize: 20),
             ),
           ],

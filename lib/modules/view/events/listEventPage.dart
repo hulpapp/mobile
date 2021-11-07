@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hulp/modules/entities/event.dart';
 import 'package:dio/dio.dart';
+import 'package:hulp/modules/presenter/Event.dart';
 
 import '../side_menu.dart';
 
@@ -13,6 +14,7 @@ class ListEvent extends StatefulWidget {
 
 class _ListEventState extends State<ListEvent> {
   late Future<List<Event>> events;
+  EventPresenter eventPresenter = new EventPresenter();
   final eventListKey = GlobalKey<_ListEventState>();
 
   @override
@@ -23,7 +25,7 @@ class _ListEventState extends State<ListEvent> {
 
   Future<List<Event>> getEventsList() async {
     var dio = Dio();
-    final response = await dio.get('https://jsonplaceholder.typicode.com/todos');
+    final response = await eventPresenter.listEvent();
 
     List<Event> events = [];
 
