@@ -44,7 +44,7 @@ class AddressState extends State<Contact> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Informe o CEP";
                   } return null;
                 },
@@ -64,7 +64,7 @@ class AddressState extends State<Contact> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Informe a Rua";
                   } return null;
                 },
@@ -84,7 +84,7 @@ class AddressState extends State<Contact> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Informe o Bairro";
                   } return null;
                 },
@@ -104,7 +104,7 @@ class AddressState extends State<Contact> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Informe a Cidade";
                   } return null;
                 },
@@ -124,7 +124,7 @@ class AddressState extends State<Contact> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Informe o Estado";
                   } return null;
                 },

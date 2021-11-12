@@ -22,10 +22,10 @@ class UploadState extends State<Upload> {
     var cpf = widget.mapInfo["cpf"];
     var rg = widget.mapInfo["rg"];
     var email = widget.mapInfo["email"];
-    var address = widget.mapInfo["street"]! + ", " +
-        widget.mapInfo["city"]! + ", " +
-        widget.mapInfo["state"]! +  ", " +
-        widget.mapInfo["cep"]!;
+    var address = widget.mapInfo["street"] + ", " +
+        widget.mapInfo["city"] + ", " +
+        widget.mapInfo["state"] +  ", " +
+        widget.mapInfo["cep"];
     var phone = widget.mapInfo["phone"];
 
 
@@ -36,28 +36,28 @@ class UploadState extends State<Upload> {
           Row(
             children: <Widget>[
               Text("Nome: ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-              Text(name!, style: TextStyle(fontSize: 16)),
+              Text(name, style: TextStyle(fontSize: 16)),
             ],
           ),
           SizedBox(height: 20),
           Row(
             children: <Widget>[
               Text("CPF: ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-              Text(cpf!, style: TextStyle(fontSize: 16)),
+              Text(cpf, style: TextStyle(fontSize: 16)),
             ],
           ),
           SizedBox(height: 20),
           Row(
             children: <Widget>[
               Text("RG: ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-              Text(rg!, style: TextStyle(fontSize: 16)),
+              Text(rg, style: TextStyle(fontSize: 16)),
             ],
           ),
           SizedBox(height: 20),
           Row(
             children: <Widget>[
               Text("Email: ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-              Text(email!, style: TextStyle(fontSize: 16)),
+              Text(email, style: TextStyle(fontSize: 16)),
             ],
           ),
           SizedBox(height: 20),
@@ -71,7 +71,7 @@ class UploadState extends State<Upload> {
           Row(
             children: <Widget>[
               Text("Mobile No: ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-              Text(phone!, style: TextStyle(fontSize: 16)),
+              Text(phone, style: TextStyle(fontSize: 16)),
             ],
           ),
         ],

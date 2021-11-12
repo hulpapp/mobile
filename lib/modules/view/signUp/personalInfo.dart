@@ -45,7 +45,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "O nome não pode ser vazio.";
                   }
                   return null;
@@ -70,7 +70,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                   CpfInputFormatter(),
                 ],
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "O CPF é obrigatorio.";
                   }
                   return null;
@@ -94,7 +94,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                   FilteringTextInputFormatter.digitsOnly,
                 ],
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "O nome não pode ser vazio.";
                   }
                   return null;
@@ -118,7 +118,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                         )
                     ),
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value.isEmpty)
                         return "Por favor Informe a data de nascimento";
                       return null;
                     },
@@ -143,7 +143,7 @@ class PersonalInfoState extends State<PersonalInfo> {
               TelefoneInputFormatter()
             ],
             validator: (value)  {
-              if (value!.trim().isEmpty) {
+              if (value.trim().isEmpty) {
                 return "Por favor informe seu telefone";
               } return null;
             },
@@ -154,7 +154,7 @@ class PersonalInfoState extends State<PersonalInfo> {
         ));
   }
   _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+    final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(1940),

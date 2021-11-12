@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hulp/modules/view/events/createEvent.dart';
 
-class SideMenu extends StatelessWidget {
-  const SideMenu({Key key}) : super(key: key);
+class SideMenuEvent extends StatelessWidget {
+  const SideMenuEvent({Key key, this.eventId}) : super(key: key);
+  final int eventId ;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +19,17 @@ class SideMenu extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            title: Text('Eventos'),
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/home/',
-              );
-            },
-          ),
+
+          // ListTile(
+          //   title: Text('Detalhes'),
+          //   onTap: () {
+          //     Navigator.pushNamed(
+          //         context,
+          //         '/event/detail',
+          //         arguments: eventId
+          //     );
+          //   },
+          // ),
           ListTile(
             title: Text('Locais'),
             onTap: () {
@@ -37,15 +40,33 @@ class SideMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Cadastrar Equipe'),
+            title: Text('Equipes'),
             onTap: () {
               Navigator.pushNamed(
                 context,
-                '/event/team/create',
+                '/teams',
+                arguments: eventId
               );
             },
           ),
-
+          ListTile(
+            title: Text('login'),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/login',
+              );
+            },
+          ),
+          ListTile(
+            title: Text('login'),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/login',
+              );
+            },
+          ),
 
 
         ],

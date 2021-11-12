@@ -73,9 +73,9 @@ class _SignUpPageState extends State<SignUpPage> {
               setState(() {
                 print(step);
 
-                if(step == 3  && PersonalInfoState.personalFormKey.currentState!.validate() &&
-                    AddressState.addressFormKey.currentState!.validate() &&
-                    LoginState.loginFormKey.currentState!.validate() ){
+                if(step == 3  && PersonalInfoState.personalFormKey.currentState.validate() &&
+                    AddressState.addressFormKey.currentState.validate() &&
+                    LoginState.loginFormKey.currentState.validate() ){
                   currentStep = step;
                 }
                 else{
@@ -87,14 +87,14 @@ class _SignUpPageState extends State<SignUpPage> {
             onStepContinue: () {
               setState(() {
                 if (currentStep < steps.length - 1) {
-                  if (currentStep == 0 && PersonalInfoState.personalFormKey.currentState!.validate()) {
+                  if (currentStep == 0 && PersonalInfoState.personalFormKey.currentState.validate()) {
                     currentStep = currentStep + 1;
                   } else if (currentStep == 1 &&
-                      AddressState.addressFormKey.currentState!.validate()) {
+                      AddressState.addressFormKey.currentState.validate()) {
                     currentStep = currentStep + 1;
                   }
                   else if (currentStep == 2 &&
-                      LoginState.loginFormKey.currentState!.validate()) {
+                      LoginState.loginFormKey.currentState.validate()) {
                     currentStep = currentStep + 1;
 
                   }

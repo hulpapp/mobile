@@ -8,7 +8,7 @@ class MainViewPage extends StatefulWidget {
 }
 
 class _MainViewPageState extends State<MainViewPage> {
-  late Future<List<Event>> events;
+  Future<List<Event>> events;
   EventPresenter eventPresenter = new EventPresenter();
   final eventListKey = GlobalKey<_MainViewPageState>();
 
@@ -43,7 +43,6 @@ class _MainViewPageState extends State<MainViewPage> {
           future: events,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) return const Text('Sem eventos Cadastrados');
-            // Render Events lists
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
@@ -61,9 +60,6 @@ class _MainViewPageState extends State<MainViewPage> {
                         context,
                         '/event/detail',
                        arguments: data
-                        // MaterialPageRoute(
-                        //   builder: (context) => DetailScreen(todo: todos[index]),
-                        // ),
                       );
                     },
                   ),

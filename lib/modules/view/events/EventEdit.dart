@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hulp/modules/entities/event.dart';
 
 class EditEventPage extends StatefulWidget {
-  const EditEventPage({Key? key, required this.event}) : super(key: key);
+  const EditEventPage({Key key,  this.event}) : super(key: key);
 
   final Event event;
 
@@ -17,10 +17,10 @@ class _EditEventPageState extends State<EditEventPage> {
   final formKey = GlobalKey<FormState>();
 
 
-  late TextEditingController nameController;
-  late TextEditingController detailController;
-  late TextEditingController startController;
-  late TextEditingController endController;
+   TextEditingController nameController;
+   TextEditingController detailController;
+   TextEditingController startController;
+   TextEditingController endController;
 
 
 

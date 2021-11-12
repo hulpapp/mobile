@@ -7,7 +7,7 @@ class AuthenticatorInteractor {
   Future login(email, password) async {
     try {
       var response = await dio
-          .post('/token/login', data: {'email': email, 'password': password});
+          .post('/login', data: {'email': email, 'password': password});
       return response.data;
     } on DioError catch (e) {
       if (e.type == DioErrorType.response) {

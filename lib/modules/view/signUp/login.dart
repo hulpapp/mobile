@@ -37,7 +37,7 @@ class LoginState extends State<Login> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Email obrigatorio";
                   } return null;
                 },
@@ -57,7 +57,7 @@ class LoginState extends State<Login> {
                   ),
                 ),
                 validator: (value) {
-                  if (value!.trim().isEmpty) {
+                  if (value.trim().isEmpty) {
                     return "Email obrigatorio";
                   } return null;
                 },

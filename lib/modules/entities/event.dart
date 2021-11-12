@@ -1,10 +1,10 @@
 class Event {
-  int? id;
-  String? name;
-  String? detail;
-  String? date;
-  String? startDate;
-  String? endDate;
+  int id;
+  String name;
+  String detail;
+  String date;
+  String startDate;
+  String endDate;
 
   Event({this.id, this.name, this.detail,this.date, this.startDate, this.endDate});
 

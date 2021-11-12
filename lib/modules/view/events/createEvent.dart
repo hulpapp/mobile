@@ -121,7 +121,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   ),
                                   onSaved: (newValue) => _event.date = newValue,
                                   onTap: () async {
-                                    DateTime? date = DateTime(1900);
+                                    DateTime date = DateTime(1900);
                                     FocusScope.of(context).requestFocus(new FocusNode());
 
                                     date = await showDatePicker(
@@ -130,7 +130,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100));
 
-                                    _eventDayController.text = DateFormat('dd/MM/yyyy').format(date!);
+                                    _eventDayController.text = DateFormat('dd/MM/yyyy').format(date);
                                   },
                                 ),
                                 SizedBox(
@@ -147,7 +147,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                     TimeOfDay time = TimeOfDay.now();
                                     FocusScope.of(context).requestFocus(new FocusNode());
 
-                                    TimeOfDay? picked = await showTimePicker(
+                                    TimeOfDay picked = await showTimePicker(
                                         context: context, initialTime: time);
                                     if (picked != null && picked != time) {
                                       _eventStartHourController.text =
@@ -172,7 +172,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                     TimeOfDay time = TimeOfDay.now();
                                     FocusScope.of(context).requestFocus(new FocusNode());
 
-                                    TimeOfDay? picked = await showTimePicker(
+                                    TimeOfDay picked = await showTimePicker(
                                         context: context, initialTime: time);
                                     if (picked != null && picked != time) {
                                       _eventEndHourController.text = picked.format(context);

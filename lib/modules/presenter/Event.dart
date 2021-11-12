@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hulp/modules/interactor/event.dart';
 import 'package:hulp/modules/entities/event.dart';
-import 'package:hulp/modules/interactor/storage.dart';
 
 
 class EventPresenter {

@@ -6,14 +6,14 @@ import 'package:hulp/modules/presenter/Event.dart';
 import '../side_menu.dart';
 
 class ListEvent extends StatefulWidget {
-  const ListEvent({Key? key}) : super(key: key);
+  const ListEvent({Key key}) : super(key: key);
 
   @override
   _ListEventState createState() => _ListEventState();
 }
 
 class _ListEventState extends State<ListEvent> {
-  late Future<List<Event>> events;
+  Future<List<Event>> events;
   EventPresenter eventPresenter = new EventPresenter();
   final eventListKey = GlobalKey<_ListEventState>();
 
@@ -24,7 +24,6 @@ class _ListEventState extends State<ListEvent> {
   }
 
   Future<List<Event>> getEventsList() async {
-    var dio = Dio();
     final response = await eventPresenter.listEvent();
 
     List<Event> events = [];

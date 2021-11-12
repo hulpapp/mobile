@@ -140,7 +140,7 @@ class _State extends State<LoginPage> {
                               onPressed: () async {
                                 FocusScopeNode currentFocus = FocusScope.of(
                                     context);
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState.validate()) {
                                   _changed();
                                   if (currentFocus.hasPrimaryFocus) {
                                     currentFocus.unfocus();

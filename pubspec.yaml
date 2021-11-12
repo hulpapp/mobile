@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -40,10 +40,13 @@ dependencies:
       url: https://github.com/erickhaendel/dart-cpfcnpj.git
   envify: ^2.0.2
   shared_preferences: ^2.0.8
-  google_maps_flutter: ^2.0.8
-  google_maps_flutter_web: ^0.3.0+4
+  google_places_flutter: ^2.0.5
+  google_maps_flutter: ^2.1.0
+  google_maps_flutter_web: ^0.3.2
   http_requests: ^1.2.0
   top_snackbar_flutter: ^1.0.1
+  rflutter_alert: ^2.0.4
+  geolocator: ^7.7.1
 
 dev_dependencies:
   flutter_test:
