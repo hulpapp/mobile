@@ -12,11 +12,10 @@ class LoginState extends State<Login> {
   static final loginFormKey = GlobalKey<FormState>();
   static TextEditingController controllerEmail = new TextEditingController();
   TextEditingController controllerConfirmEmail = new TextEditingController();
-  TextEditingController controllerPassword = new TextEditingController();
+  static TextEditingController controllerPassword = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
         child: Form(
           autovalidateMode: AutovalidateMode.disabled,

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hulp/env/env.dart';
+import 'package:hulp/modules/entities/signUp.dart';
 
 class AuthenticatorInteractor {
   Dio dio = Dio(BaseOptions(baseUrl: Env.api_url));
@@ -26,4 +27,17 @@ class AuthenticatorInteractor {
       }
     }
   }
+  Future createUser(SignUp signUp) async {
+    try {
+      var response = await dio
+          .post('/signup', data: signUp);
+      return response.data;
+    } on DioError catch (e) {
+      throw e.message;
+    }
+  }
+
+
+
+
 }

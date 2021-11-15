@@ -14,7 +14,6 @@ class PersonalInfoState extends State<PersonalInfo> {
   static TextEditingController controllerCPF = new TextEditingController();
   static TextEditingController controllerRG = new TextEditingController();
   static TextEditingController controllerPassport = new TextEditingController();
-
   static TextEditingController controllerLastName = new TextEditingController();
   static TextEditingController controllerDateOfBirth = new TextEditingController();
   static TextEditingController controllerMobileNo = new TextEditingController();
@@ -85,7 +84,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                     Icons.account_box_sharp ,
                     color: Colors.grey,
                   ),
-                  labelText: 'Passaporte',
+                  labelText: 'Passaporte ou RG',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
@@ -95,7 +94,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                 ],
                 validator: (value) {
                   if (value.trim().isEmpty) {
-                    return "O nome não pode ser vazio.";
+                    return "O informe um documento.";
                   }
                   return null;
                 },

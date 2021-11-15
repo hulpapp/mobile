@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hulp/modules/view/reports.dart';
 
 class SideMenuEvent extends StatelessWidget {
   const SideMenuEvent({Key key, this.eventId}) : super(key: key);
@@ -50,11 +51,15 @@ class SideMenuEvent extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('login'),
+            title: Text('Relatórios'),
             onTap: () {
-              Navigator.pushNamed(
+              Navigator.push(
                 context,
-                '/login',
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ReportPage(
+                          eventId: eventId,
+                        )),
               );
             },
           ),

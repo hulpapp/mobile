@@ -10,6 +10,10 @@ class EventPresenter {
     return await eventInteractor.create(event);
   }
 
+  Future editEvent(Event event) async {
+    return await eventInteractor.update(event);
+  }
+
   Future listEvent() async {
     return await eventInteractor.list();
   }

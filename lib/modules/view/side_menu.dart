@@ -37,14 +37,15 @@ class SideMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Cadastrar Equipe'),
+            title: Text('Beneficiários'),
             onTap: () {
               Navigator.pushNamed(
                 context,
-                '/event/team/create',
+                '/beneficiary',
               );
             },
           ),
+
 
 
 

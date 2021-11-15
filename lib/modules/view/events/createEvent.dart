@@ -20,6 +20,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
   var _eventForm = GlobalKey<FormState>();
   TextEditingController _namelController = TextEditingController();
   TextEditingController _descriptionlController = TextEditingController();
+  TextEditingController _cityController = TextEditingController();
   TextEditingController _eventDayController = TextEditingController();
   TextEditingController _eventStartHourController = TextEditingController();
   TextEditingController _eventEndHourController = TextEditingController();
@@ -28,10 +29,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
 
   Future createNewEvent(Event event) async {
     await eventPresenter.createEvent(event).then((value) => showSnackBar(successText,context,'success'))
-        .then((value) =>    Navigator.pushNamed(
-      context,
-      '/home/',
-    )).catchError((e) {
+        .then((value) =>   Navigator.pop(context)).catchError((e) {
 
       showSnackBar(e,context,'error');
     });
@@ -108,6 +106,24 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                     return null;
                                   },
                                   onSaved: (newValue) => _event.detail = newValue,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: _cityController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: "Cidade do Evento",
+                                    hintText: "Cidade onde o Evento Ocorrerá",
+                                  ),
+                                  validator: (city) {
+                                    if (city == null || city.isEmpty) {
+                                      return 'Por favor, a cidade do Evento.';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (newValue) => _event.city = newValue,
                                 ),
                                 SizedBox(
                                   height: 20,

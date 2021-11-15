@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hulp/modules/entities/event.dart';
 import 'package:hulp/modules/presenter/Event.dart';
+import 'package:hulp/modules/view/events/EventDetails.dart';
+
 
 class MainViewPage extends StatefulWidget {
   @override
@@ -42,7 +44,7 @@ class _MainViewPageState extends State<MainViewPage> {
         child: FutureBuilder<List>(
           future: events,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) return const Text('Sem eventos Cadastrados');
+            if (!snapshot.hasData || snapshot.data.length == 0) return const Text('Sem eventos Cadastrados',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),);
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
@@ -56,10 +58,12 @@ class _MainViewPageState extends State<MainViewPage> {
                       style: const TextStyle(fontSize: 20),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(
+                      Navigator.push(
                         context,
-                        '/event/detail',
-                       arguments: data
+                        MaterialPageRoute(
+                            builder: (context) => EventDetail(
+                              event: data,
+                            )),
                       );
                     },
                   ),

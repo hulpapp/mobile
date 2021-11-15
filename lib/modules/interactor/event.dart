@@ -15,6 +15,17 @@ class EventInteractor {
     }
   }
 
+  Future update(Event event) async {
+    try {
+      var response = await dio
+          .put('/events/${event.id}', data: {'event':event});
+      return response.data;
+    } on DioError catch (e) {
+      throw e.message;
+    }
+  }
+
+
 
   Future list() async {
     try {

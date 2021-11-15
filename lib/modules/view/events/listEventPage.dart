@@ -15,7 +15,7 @@ class ListEvent extends StatefulWidget {
 class _ListEventState extends State<ListEvent> {
   Future<List<Event>> events;
   EventPresenter eventPresenter = new EventPresenter();
-  final eventListKey = GlobalKey<_ListEventState>();
+  final eventKey = GlobalKey<_ListEventState>();
 
   @override
   void initState() {
@@ -42,39 +42,44 @@ class _ListEventState extends State<ListEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: eventListKey,
+      key: eventKey,
       appBar: AppBar(
         title: const Text('Lista de Eventos'),
       ),
       drawer: SideMenu(),
-      body: Center(
-        child: FutureBuilder<List>(
-          future: events,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            // By default, show a loading spinner.
-            if (!snapshot.hasData) return const Text('Sem eventos Cadastrados');
-            // Render Events lists
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (BuildContext context, int index) {
-                var data = snapshot.data[index];
-                return Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.event),
-                    trailing: const Icon(Icons.view_list),
-                    title: Text(
-                      data.title,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    onTap: () {
+      body: Column(
+        children: [
 
-                    },
-                  ),
+          Center(
+            child: FutureBuilder<List>(
+              future: events,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                // By default, show a loading spinner.
+                if (!snapshot.hasData) return const Text('Sem eventos Cadastrados');
+                // Render Events lists
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var data = snapshot.data[index];
+                    return Card(
+                      child: ListTile(
+                        leading: const Icon(Icons.event),
+                        trailing: const Icon(Icons.view_list),
+                        title: Text(
+                          data.title,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        onTap: () {
+
+                        },
+                      ),
+                    );
+                  },
                 );
               },
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),

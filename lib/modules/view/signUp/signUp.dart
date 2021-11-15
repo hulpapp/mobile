@@ -1,10 +1,12 @@
-import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:hulp/modules/entities/signUp.dart';
 import 'package:hulp/modules/view/signUp/upload.dart';
 import 'package:hulp/utils/responsivity.dart';
 import 'package:hulp/modules/view/signUp/address.dart';
 import 'package:hulp/modules/view/signUp/personalInfo.dart';
 import 'package:hulp/modules/view/signUp/login.dart';
+import 'package:hulp/modules/presenter/user.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignUpPage extends StatefulWidget {
   String get title => 'Cadastro';
@@ -15,21 +17,26 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   var currentStep = 0;
+  bool logging = false;
+
+  UserPresenter userPresenter = new UserPresenter();
 
   @override
   Widget build(BuildContext context) {
 
-    var mapData = HashMap<String, String>();
-    mapData["nome"] = PersonalInfoState.controllerName.text;
-    mapData["cpf"] = PersonalInfoState.controllerCPF.text;
-    mapData["rg"] = PersonalInfoState.controllerPassport.text;
-    mapData["birth"] = PersonalInfoState.controllerDateOfBirth.text;
-    mapData["phone"] = PersonalInfoState.controllerMobileNo.text;
-    mapData["email"] = LoginState.controllerEmail.text;
-    mapData["cep"] = AddressState.controllerCEP.text;
-    mapData["street"] = AddressState.controllerStreet.text;
-    mapData["city"] = AddressState.controllerCity.text;
-    mapData["state"] = AddressState.controllerState.text;
+
+    SignUp mapData =new SignUp();
+    mapData.name = PersonalInfoState.controllerName.text;
+    mapData.cpf = PersonalInfoState.controllerCPF.text;
+    mapData.identity  = PersonalInfoState.controllerPassport.text;
+    mapData.telephone  = PersonalInfoState.controllerMobileNo.text;
+    mapData.email = LoginState.controllerEmail.text;
+    mapData.cep = AddressState.controllerCEP.text;
+    mapData.street = AddressState.controllerStreet.text;
+    mapData.city = AddressState.controllerCity.text;
+    mapData.state  = AddressState.controllerState.text;
+    mapData.password = LoginState.controllerPassword.text;
+    mapData.passwordConfirmation = LoginState.controllerPassword.text;
 
     List<Step> steps = [
       Step(
@@ -62,8 +69,8 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Container(
+      body:  Center(
+        child: !logging? Container(
           width: card(context),
           child: Stepper(
             currentStep: this.currentStep,
@@ -99,7 +106,28 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   }
                 } else {
-                  currentStep = 0;
+                  userPresenter.createNewUser(mapData).then((value)=>{
+                    Alert(
+                  context: context,
+                  type: AlertType.success,
+                  title: "Usuário Criado com sucesso!!",
+                  desc: "Gentileza realizar o login",
+                  buttons: [
+                  DialogButton(
+                  child: Text(
+                  "OK",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPressed: () =>      Navigator.pushNamed(
+                    context,
+                    '/login/',
+                  ),
+                  width: 120,
+                  )
+                  ],
+                  ).show()}
+                  );
+
                 }
               });
             },
@@ -113,7 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
               });
             },
           ),
-        ),
+        ): CircularProgressIndicator(),
       ),
     );
   }
