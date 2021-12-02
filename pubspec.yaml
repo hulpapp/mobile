@@ -50,7 +50,10 @@ dependencies:
   syncfusion_flutter_datagrid: ^19.3.45
   syncfusion_flutter_datagrid_export: ^19.3.45-beta
   multi_select_flutter: ^4.0.0
-
+  jwt_decoder: ^2.0.1
+  mask_text_input_formatter: ^2.0.0
+  syncfusion_flutter_pdf: ^19.3.56-beta
+  universal_html: ^2.0.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

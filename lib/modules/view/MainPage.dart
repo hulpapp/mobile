@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hulp/modules/entities/event.dart';
 import 'package:hulp/modules/presenter/Event.dart';
+import 'package:hulp/modules/presenter/team.dart';
 import 'package:hulp/modules/view/events/EventDetails.dart';
 
 
@@ -11,13 +12,18 @@ class MainViewPage extends StatefulWidget {
 
 class _MainViewPageState extends State<MainViewPage> {
   Future<List<Event>> events;
+  Future<List<Event>> qee;
   EventPresenter eventPresenter = new EventPresenter();
+  TeamPresenter teamPresenter = new TeamPresenter();
   final eventListKey = GlobalKey<_MainViewPageState>();
+
+
 
   @override
   void initState() {
     super.initState();
     events = getEventsList();
+
   }
 
   Future<List<Event>> getEventsList() async {
@@ -29,9 +35,9 @@ class _MainViewPageState extends State<MainViewPage> {
       events.add(Event.fromJson(i));
 
     }
-    print(events);
     return events;
   }
+
 
 
 

@@ -180,9 +180,8 @@ class _LocationSelectPageState extends State<LocationSelectPage> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: GooglePlaceAutoCompleteTextField(
           textEditingController: controller,
-          googleAPIKey: "",
-          inputDecoration:
-              InputDecoration(hintText: "Informe o local do evento"),
+          googleAPIKey: "AIzaSyDrwstnLw1juxgCpO96tEm5YfF3UKDTOgM",
+          inputDecoration: InputDecoration(hintText: "Informe o local do evento"),
           debounceTime: 800,
           countries: ["br"],
           isLatLngRequired: true,

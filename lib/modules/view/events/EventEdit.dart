@@ -41,6 +41,7 @@ class _EditEventPageState extends State<EditEventPage> {
       _eventStartHourController.text = widget.event.startDate;
       _eventEndHourController.text = widget.event.endDate;
       _event.id = widget.event.id;
+      _event.userId = widget.event.userId;
 
     }
 

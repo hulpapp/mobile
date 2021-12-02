@@ -8,6 +8,9 @@ import 'package:hulp/modules/view/AddEventPlace.dart';
 import 'package:hulp/modules/view/events/EventEdit.dart';
 import 'package:hulp/modules/view/teams.dart';
 import 'package:hulp/utils/responsivity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../Certificado.dart';
+import '../PresencePage.dart';
 import '../donations.dart';
 import '../side_menu_event.dart';
 
@@ -29,6 +32,7 @@ class _EventDetailState extends State<EventDetail> {
   EventPlaceInteractor _eventPlaceInteractor = new EventPlaceInteractor();
   List<EventPlace> places = [];
   GoogleMapController mapController;
+  int userId;
 
   Future _getCurrentLocation() async {
     await Geolocator
@@ -44,11 +48,20 @@ class _EventDetailState extends State<EventDetail> {
 
   @override
   void initState() {
+
     super.initState();
     _getCurrentLocation();
     getPlaces(widget.event.id);
+    getUSer();
   }
 
+  getUSer() async {
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
+    setState(() {
+      userId = prefs.get("user");
+    });
+
+  }
 
   getPlaces(id) async {
     final response = await _eventPlaceInteractor.list(id);
@@ -119,7 +132,7 @@ class _EventDetailState extends State<EventDetail> {
                   children: [
                     Card(
                       child: Container(
-                        height: 350,
+                        height: 400,
                         child: ListView(
                           padding: EdgeInsets.all(20),
                           children: [
@@ -235,6 +248,41 @@ class _EventDetailState extends State<EventDetail> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
+                                const SizedBox(width: 8),
+                                ElevatedButton(
+                                  child: const Text('Certificado'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.green,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CertificationPage(
+                                                event: widget.event,
+                                              )),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                                ElevatedButton(
+                                child: const Text('Presença'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.green,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PresencePage(
+                                              event: widget.event,
+                                            )),
+                                  );
+                                },
+                              ),
+                                const SizedBox(width: 8),
                                 ElevatedButton(
                                   child: const Text('Cadastrar Doações'),
                                   style: ElevatedButton.styleFrom(
@@ -252,69 +300,103 @@ class _EventDetailState extends State<EventDetail> {
                                   },
                                 ),
                                 const SizedBox(width: 8),
-                                ElevatedButton(
-                                  child: const Text('Adicionar Equipes'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.orangeAccent,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.popAndPushNamed(
-                                        context,
-                                        '/teams/new',
-                                        arguments: widget.event.id
-                                    );
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                ElevatedButton(
-                                  child: const Text('Equipes'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.orangeAccent,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.popAndPushNamed(
-                                      context,
-                                        '/teams',
-                                        arguments: widget.event.id
-                                    );
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                ElevatedButton(
-                                  child: const Text('Editar Informações'),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              EditEventPage(
-                                                event: widget.event,
-                                              )),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.lightBlue,
-                                  ),
-                                  child: const Text('Cadastrar locais'),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              LocationSelectPage(
-                                                event: widget.event,
-                                                markers:  markers,
-                                                eventPlaces: places,
-                                              )),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(width: 8),
+
+
+
+
                               ],
                             ),
+                            if(userId == widget.event.userId )Row(children: [
+                              ElevatedButton(
+                                child: const Text('Adicionar Equipes'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.orangeAccent,
+                                ),
+                                onPressed: () {
+                                  Navigator.popAndPushNamed(
+                                      context,
+                                      '/teams/new',
+                                      arguments: widget.event.id
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                child: const Text('Motorista'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.cyan,
+                                ),
+                                onPressed: () {
+                                  Navigator.popAndPushNamed(
+                                    context,
+                                    '/motorista',
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                child: const Text('Adicionar Equipes'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.orangeAccent,
+                                ),
+                                onPressed: () {
+                                  Navigator.popAndPushNamed(
+                                      context,
+                                      '/teams/new',
+                                      arguments: widget.event.id
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                child: const Text('Editar Informações'),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditEventPage(
+                                              event: widget.event,
+                                            )),
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                child: const Text('Equipes'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.orangeAccent,
+                                ),
+                                onPressed: () {
+                                  Navigator.popAndPushNamed(
+                                      context,
+                                      '/teams',
+                                      arguments: widget.event.id
+                                  );
+                                },
+                              ),
+
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.lightBlue,
+                                ),
+                                child: const Text('Cadastrar locais'),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LocationSelectPage(
+                                              event: widget.event,
+                                              markers:  markers,
+                                              eventPlaces: places,
+                                            )),
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 8),
+                            ],)
                           ],
                         ),
                       ),
